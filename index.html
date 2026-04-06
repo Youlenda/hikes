@@ -3,8 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Our Hiking Journal</title>
+  <title>Summit Journal</title>
   <style>
+    html {
+      box-sizing: border-box;
+    }
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: #f7f7f7; /* Lighter background */
@@ -204,17 +210,239 @@
       height: 1px;
       background: #e0e0e0;
     }
+    .toc-drawer-state {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .toc-drawer-state:focus-visible ~ .toc-fab {
+      outline: 2px solid #211d19;
+      outline-offset: 3px;
+    }
+    .toc-fab,
+    .toc-scrim {
+      display: none;
+    }
+    .toc .toc-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #888;
+      margin: 0 0 12px;
+    }
+    .toc ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .toc .toc-year {
+      margin-bottom: 14px;
+    }
+    .toc .toc-year:last-child {
+      margin-bottom: 0;
+    }
+    .toc .toc-year > a {
+      display: block;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: #594D46;
+      text-decoration: none;
+      margin-bottom: 6px;
+    }
+    .toc .toc-year > a:hover {
+      color: #D1B280;
+    }
+    .toc-hikes {
+      padding-left: 8px;
+      border-left: 1px solid #eee;
+    }
+    .toc-hikes li {
+      margin: 5px 0;
+      line-height: 1.35;
+    }
+    .toc-hikes a {
+      color: #666;
+      text-decoration: none;
+      font-size: 12px;
+    }
+    .toc-hikes a:hover {
+      color: #D1B280;
+    }
+    .container[id],
+    .year-header[id] {
+      scroll-margin-top: 16px;
+    }
+    .toc {
+      display: none;
+    }
+    @media (max-width: 1259px) {
+      body:has(.toc-drawer-state:checked) {
+        overflow: hidden;
+      }
+      .toc-fab {
+        display: inline-block;
+        position: fixed;
+        bottom: calc(22px + env(safe-area-inset-bottom, 0px));
+        right: calc(18px + env(safe-area-inset-right, 0px));
+        z-index: 201;
+        padding: 12px 20px;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: #211d19;
+        background: #D1B280;
+        border-radius: 24px;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+        cursor: pointer;
+        font-family: inherit;
+        border: none;
+        user-select: none;
+        -webkit-tap-highlight-color: transparent;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+      .toc-scrim {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 199;
+        background: rgba(33, 29, 25, 0.42);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s ease;
+      }
+      .toc-drawer-state:checked ~ .toc-scrim {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .toc-drawer-state:checked ~ .toc-fab {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.92);
+      }
+      .toc {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: min(78vh, 520px);
+        margin: 0;
+        padding: 20px 22px calc(24px + env(safe-area-inset-bottom, 0px));
+        background: #fff;
+        border-radius: 16px 16px 0 0;
+        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.14);
+        border: none;
+        border-top: 3px solid #D1B280;
+        z-index: 200;
+        font-size: 14px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transform: translateY(105%);
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .toc-drawer-state:checked ~ .toc {
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .toc .toc-title {
+        font-size: 12px;
+      }
+      .toc .toc-year > a {
+        font-size: 13px;
+      }
+      .toc-hikes a {
+        font-size: 13px;
+      }
+    }
+    /* TOC in the left margin of the centered 850px column; no layout shift */
+    @media (min-width: 1260px) {
+      .toc-fab,
+      .toc-scrim {
+        display: none !important;
+      }
+      .toc {
+        display: block;
+        position: fixed;
+        left: max(10px, calc(50vw - 425px - 16px - 188px));
+        top: 50%;
+        transform: translateY(-50%);
+        width: 188px;
+        max-height: min(78vh, 640px);
+        overflow-y: auto;
+        padding: 16px 14px;
+        margin: 0;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        border: none;
+        border-left: 3px solid #D1B280;
+        z-index: 10;
+        font-size: 13px;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
   </style>
 </head>
 <body>
 
+<input type="checkbox" id="toc-drawer-state" class="toc-drawer-state" aria-controls="site-toc">
+
 <header>
-  <h1>Atabak & Yalda's Hiking Journal</h1>
+  <h1>Summit Journal</h1>
 </header>
 
-<div class="year-header"><h2>2026</h2></div>
+<label for="toc-drawer-state" class="toc-fab">Hikes</label>
+<label for="toc-drawer-state" class="toc-scrim" aria-label="Close table of contents"></label>
 
-<div class="container">
+<nav class="toc" id="site-toc" aria-label="Table of contents">
+  <p class="toc-title">Contents</p>
+  <ul>
+    <li class="toc-year">
+      <a href="#year-2026">2026</a>
+      <ul class="toc-hikes">
+        <li><a href="#killarney-lake">Killarney Lake</a></li>
+      </ul>
+    </li>
+    <li class="toc-year">
+      <a href="#year-2025">2025</a>
+      <ul class="toc-hikes">
+        <li><a href="#quarry-rock-2025">Quarry Rock</a></li>
+        <li><a href="#bowen-lookout">Bowen Lookout</a></li>
+        <li><a href="#lindeman-lake">Lindeman Lake</a></li>
+        <li><a href="#elfin-lakes">Elfin Lakes</a></li>
+        <li><a href="#golden-ears">Golden Ears</a></li>
+        <li><a href="#kennedy-falls">Kennedy Falls</a></li>
+      </ul>
+    </li>
+    <li class="toc-year">
+      <a href="#year-2024">2024</a>
+      <ul class="toc-hikes">
+        <li><a href="#joffre-lakes">Joffre Lakes</a></li>
+        <li><a href="#lighthouse-park">Lighthouse Park</a></li>
+        <li><a href="#garibaldi-lake">Garibaldi Lake</a></li>
+        <li><a href="#eagle-bluffs">Eagle Bluffs</a></li>
+        <li><a href="#tunnel-bluffs">Tunnel Bluffs</a></li>
+        <li><a href="#lynn-canyon-rice-lake">Lynn Canyon and Rice Lake Loop</a></li>
+        <li><a href="#quarry-rock-2024">Quarry Rock</a></li>
+        <li><a href="#johnston-canyon-upper-falls">Johnston Canyon to Upper Falls</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+<div class="year-header" id="year-2026"><h2>2026</h2></div>
+
+<div class="container" id="killarney-lake">
   <div class="hike-header">
     <h2 class="hike-title">Killarney Lake</h2>
     <p class="hike-date">April 5, 2026</p>
@@ -257,9 +485,9 @@
   </div>
 </div>
 
-<div class="year-header"><h2>2025</h2></div>
+<div class="year-header" id="year-2025"><h2>2025</h2></div>
 
-<div class="container">
+<div class="container" id="quarry-rock-2025">
   <div class="hike-header">
     <h2 class="hike-title">Quarry Rock</h2>
     <p class="hike-date">November 29, 2025</p>
@@ -302,7 +530,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="bowen-lookout">
   <div class="hike-header">
     <h2 class="hike-title">Bowen Lookout</h2>
     <p class="hike-date">August 31, 2025</p>
@@ -345,7 +573,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="lindeman-lake">
   <div class="hike-header">
     <h2 class="hike-title">Lindeman Lake</h2>
     <p class="hike-date">August 9–10, 2025</p>
@@ -388,7 +616,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="elfin-lakes">
   <div class="hike-header">
     <h2 class="hike-title">Elfin Lakes</h2>
     <p class="hike-date">June 28–29, 2025</p>
@@ -431,7 +659,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="golden-ears">
   <div class="hike-header">
     <h2 class="hike-title">Golden Ears</h2>
     <p class="hike-date">May 30–31, 2025</p>
@@ -474,7 +702,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="kennedy-falls">
   <div class="hike-header">
     <h2 class="hike-title">Kennedy Falls</h2>
     <p class="hike-date">April 19, 2025</p>
@@ -517,9 +745,9 @@
   </div>
 </div>
 
-<div class="year-header"><h2>2024</h2></div>
+<div class="year-header" id="year-2024"><h2>2024</h2></div>
 
-<div class="container">
+<div class="container" id="joffre-lakes">
   <div class="hike-header">
     <h2 class="hike-title">Joffre Lakes</h2>
     <p class="hike-date">October 13, 2024</p>
@@ -562,7 +790,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="lighthouse-park">
   <div class="hike-header">
     <h2 class="hike-title">Lighthouse Park</h2>
     <p class="hike-date">September 21, 2024</p>
@@ -605,7 +833,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="garibaldi-lake">
   <div class="hike-header">
     <h2 class="hike-title">Garibaldi Lake</h2>
     <p class="hike-date">September 12, 2024</p>
@@ -648,7 +876,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="eagle-bluffs">
   <div class="hike-header">
     <h2 class="hike-title">Eagle Bluffs</h2>
     <p class="hike-date">August 25, 2024</p>
@@ -691,7 +919,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="tunnel-bluffs">
   <div class="hike-header">
     <h2 class="hike-title">Tunnel Bluffs</h2>
     <p class="hike-date">August 3, 2024</p>
@@ -734,7 +962,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="lynn-canyon-rice-lake">
   <div class="hike-header">
     <h2 class="hike-title">Lynn Canyon and Rice Lake Loop</h2>
     <p class="hike-date">July 13, 2024</p>
@@ -777,7 +1005,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="quarry-rock-2024">
   <div class="hike-header">
     <h2 class="hike-title">Quarry Rock</h2>
     <p class="hike-date">June 8, 2024</p>
@@ -820,7 +1048,7 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container" id="johnston-canyon-upper-falls">
   <div class="hike-header">
     <h2 class="hike-title">Johnston Canyon to Upper Falls</h2>
     <p class="hike-date">June 1, 2024</p>
@@ -862,6 +1090,29 @@
     </div>
   </div>
 </div>
+
+<script>
+(function () {
+  var cb = document.getElementById('toc-drawer-state');
+  var toc = document.getElementById('site-toc');
+  if (!cb || !toc) return;
+  var mq = window.matchMedia('(max-width: 1259px)');
+  function syncTocAria() {
+    if (!mq.matches) {
+      toc.removeAttribute('aria-hidden');
+      return;
+    }
+    toc.setAttribute('aria-hidden', cb.checked ? 'false' : 'true');
+  }
+  cb.addEventListener('change', syncTocAria);
+  mq.addEventListener('change', syncTocAria);
+  toc.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (a) cb.checked = false;
+  });
+  syncTocAria();
+})();
+</script>
 
 </body>
 </html>
