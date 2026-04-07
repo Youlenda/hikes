@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Summit Journal</title>
+  <title>Trail Journal</title>
   <style>
     html {
       box-sizing: border-box;
@@ -23,13 +23,24 @@
       background-color: #211d19; /* Black Steel */
       padding: 30px;
       text-align: center;
-      color: #D1B280; /* Gold Leaf */
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     header h1 {
       margin: 0;
       font-weight: 500;
       letter-spacing: 1px;
+      color: #D1B280; /* Gold Leaf — same as before */
+    }
+    header .header-tagline {
+      margin: 14px 0 0;
+      font-size: 15px;
+      font-weight: 400;
+      color: #f0e4d4; /* cream */
+      letter-spacing: 0.2px;
+      line-height: 1.45;
+      max-width: 28em;
+      margin-left: auto;
+      margin-right: auto;
     }
     .container {
       max-width: 850px;
@@ -276,6 +287,10 @@
     .toc-hikes a:hover {
       color: #D1B280;
     }
+    .toc-hikes a.is-active {
+      color: #D1B280;
+      font-weight: 600;
+    }
     .container[id],
     .year-header[id] {
       scroll-margin-top: 16px;
@@ -398,7 +413,8 @@
 <input type="checkbox" id="toc-drawer-state" class="toc-drawer-state" aria-controls="site-toc">
 
 <header>
-  <h1>Summit Journal</h1>
+  <h1>Trail Journal</h1>
+  <p class="header-tagline">Where I keep track of hikes and nights under the stars.</p>
 </header>
 
 <label for="toc-drawer-state" class="toc-fab">Hikes</label>
@@ -457,7 +473,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">7.7km</div>
           </div>
           <div class="stat-box">
@@ -465,13 +481,13 @@
             <div class="value">202m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">367cal</div>
+            <div class="label">Duration</div>
+            <div class="value">1h 59m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Bowen Island, BC</p>
-          <p><strong>Time Taken:</strong> 1h 59m</p>
+          <p><strong>Active Calories:</strong> 367cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -502,7 +518,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">5.4km</div>
           </div>
           <div class="stat-box">
@@ -510,13 +526,13 @@
             <div class="value">316m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">378cal</div>
+            <div class="label">Duration</div>
+            <div class="value">1h 43m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> North Vancouver, BC</p>
-          <p><strong>Time Taken:</strong> 1h 43m</p>
+          <p><strong>Active Calories:</strong> 378cal</p>
           <p><strong>Hiking Buddies:</strong> Mo</p>
         </div>
         <div class="link">
@@ -545,7 +561,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">5.7km</div>
           </div>
           <div class="stat-box">
@@ -553,13 +569,13 @@
             <div class="value">153m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">344cal</div>
+            <div class="label">Duration</div>
+            <div class="value">1h 46m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Cypress Provincial Park, BC</p>
-          <p><strong>Time Taken:</strong> 1h 46m</p>
+          <p><strong>Active Calories:</strong> 344cal</p>
           <p><strong>Hiking Buddies:</strong> Maria, Helena, Ipek</p>
         </div>
         <div class="link">
@@ -588,7 +604,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">4.3km</div>
           </div>
           <div class="stat-box">
@@ -596,13 +612,13 @@
             <div class="value">262m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">338cal</div>
+            <div class="label">Duration</div>
+            <div class="value">2h (1 way)</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Chilliwack Lake Provincial Park, BC</p>
-          <p><strong>Time Taken:</strong> 2h (1 way)</p>
+          <p><strong>Active Calories:</strong> 338cal</p>
           <p><strong>Hiking Buddies:</strong> Maria, George, Lufan, Yanshu</p>
         </div>
         <div class="link">
@@ -631,7 +647,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">18.5km</div>
           </div>
           <div class="stat-box">
@@ -639,13 +655,13 @@
             <div class="value">820m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">1280cal</div>
+            <div class="label">Duration</div>
+            <div class="value">6h 4m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Garibaldi Provincial Park, BC</p>
-          <p><strong>Time Taken:</strong> 6h 4m</p>
+          <p><strong>Active Calories:</strong> 1280cal</p>
           <p><strong>Hiking Buddies:</strong> Pouya, Mahdis</p>
         </div>
         <div class="link">
@@ -674,7 +690,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">6.7km</div>
           </div>
           <div class="stat-box">
@@ -682,13 +698,13 @@
             <div class="value">121m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">305cal</div>
+            <div class="label">Duration</div>
+            <div class="value">2h 10m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Golden Ears Provincial Park, BC</p>
-          <p><strong>Time Taken:</strong> 2h 10m</p>
+          <p><strong>Active Calories:</strong> 305cal</p>
           <p><strong>Hiking Buddies:</strong> Maria, George, Chirag, Ahan</p>
         </div>
         <div class="link">
@@ -717,7 +733,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">11.9km</div>
           </div>
           <div class="stat-box">
@@ -725,13 +741,13 @@
             <div class="value">455m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">775cal</div>
+            <div class="label">Duration</div>
+            <div class="value">4h 13m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> North Vancouver, BC</p>
-          <p><strong>Time Taken:</strong> 4h 13m</p>
+          <p><strong>Active Calories:</strong> 775cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -762,7 +778,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">8.8km</div>
           </div>
           <div class="stat-box">
@@ -770,13 +786,13 @@
             <div class="value">419m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">670cal</div>
+            <div class="label">Duration</div>
+            <div class="value">3h 35m</div>
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> Duffey, BC</p>
-          <p><strong>Time Taken:</strong> 3h 35m</p>
+          <p><strong>Location:</strong> Pemberton, BC</p>
+          <p><strong>Active Calories:</strong> 670cal</p>
           <p><strong>Hiking Buddies:</strong> Maria, Helena, Alex</p>
         </div>
         <div class="link">
@@ -805,7 +821,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">4.5km</div>
           </div>
           <div class="stat-box">
@@ -813,14 +829,14 @@
             <div class="value">195m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">307cal</div>
+            <div class="label">Duration</div>
+            <div class="value">2h 17m</div>
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> Duffey, BC</p>
-          <p><strong>Time Taken:</strong> 2h 17m</p>
-          <p><strong>Hiking Buddies:</strong> Alex, Bema, Chiragh </p>
+          <p><strong>Location:</strong> West Vancouver, BC</p>
+          <p><strong>Active Calories:</strong> 307cal</p>
+          <p><strong>Hiking Buddies:</strong> Alex, Bema, Chirag </p>
         </div>
         <div class="link">
           <a href="https://www.alltrails.com/trail/canada/british-columbia/lighthouse-park-viewpoint-loop" target="_blank">View Hike on AllTrails</a>
@@ -848,7 +864,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">18.6km</div>
           </div>
           <div class="stat-box">
@@ -856,13 +872,13 @@
             <div class="value">972m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">1350cal</div>
+            <div class="label">Duration</div>
+            <div class="value">5h 27m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> BC</p>
-          <p><strong>Time Taken:</strong> 5h 27m</p>
+          <p><strong>Active Calories:</strong> 1350cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -891,7 +907,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">10.9km</div>
           </div>
           <div class="stat-box">
@@ -899,13 +915,13 @@
             <div class="value">549m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">853cal</div>
+            <div class="label">Duration</div>
+            <div class="value">3h 57m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Cypress Provincial Park, BC</p>
-          <p><strong>Time Taken:</strong> 3h 57m</p>
+          <p><strong>Active Calories:</strong> 853cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -934,7 +950,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">14.0km</div>
           </div>
           <div class="stat-box">
@@ -942,13 +958,13 @@
             <div class="value">588m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">969cal</div>
+            <div class="label">Duration</div>
+            <div class="value">4h 53m</div>
           </div>
         </div>
         <div class="info">
           <p><strong>Location:</strong> Squamish-Lillooet, BC</p>
-          <p><strong>Time Taken:</strong> 4h 53m</p>
+          <p><strong>Active Calories:</strong> 969cal</p>
           <p><strong>Hiking Buddies:</strong> Chirag</p>
         </div>
         <div class="link">
@@ -977,7 +993,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">7.0km</div>
           </div>
           <div class="stat-box">
@@ -985,13 +1001,13 @@
             <div class="value">165m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">370cal</div>
+            <div class="label">Duration</div>
+            <div class="value">2h 24m</div>
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> North Vancouver, BC</p> <!-- Assuming location based on Johnston Canyon -->
-          <p><strong>Time Taken:</strong> 2h 24m</p>
+          <p><strong>Location:</strong> North Vancouver, BC</p>
+          <p><strong>Active Calories:</strong> 370cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -1020,7 +1036,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">9.5km</div>
           </div>
           <div class="stat-box">
@@ -1028,13 +1044,13 @@
             <div class="value">384m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">668cal</div>
+            <div class="label">Duration</div>
+            <div class="value">3h 18m</div>
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> North Vancouver, BC</p> <!-- Assuming location based on Johnston Canyon -->
-          <p><strong>Time Taken:</strong> 3h 18m</p>
+          <p><strong>Location:</strong> North Vancouver, BC</p>
+          <p><strong>Active Calories:</strong> 668cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
         <div class="link">
@@ -1063,7 +1079,7 @@
       <div class="hike-details">
         <div class="stats-container">
           <div class="stat-box">
-            <div class="label">Length</div>
+            <div class="label">Distance</div>
             <div class="value">5.8km</div>
           </div>
           <div class="stat-box">
@@ -1071,13 +1087,13 @@
             <div class="value">191m</div>
           </div>
           <div class="stat-box">
-            <div class="label">Active Calories</div>
-            <div class="value">391cal</div>
+            <div class="label">Duration</div>
+            <div class="value">1h 55m</div>
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> Banff, AB</p> <!-- Assuming location based on Johnston Canyon -->
-          <p><strong>Time Taken:</strong> 1h 55m</p>
+          <p><strong>Location:</strong> Banff, AB</p>
+          <p><strong>Active Calories:</strong> 391cal</p>
           <p><strong>Hiking Buddies:</strong> Amin, Nikoo</p>
         </div>
         <div class="link">
@@ -1111,6 +1127,55 @@
     if (a) cb.checked = false;
   });
   syncTocAria();
+
+  var sections = [].slice.call(document.querySelectorAll('.container[id]'));
+  var hikeLinks = toc.querySelectorAll('.toc-hikes a[href^="#"]');
+  var linkById = {};
+  hikeLinks.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    linkById[id] = a;
+  });
+
+  var tocSpyTicking = false;
+  function updateTocActive() {
+    tocSpyTicking = false;
+    var offset = Math.min(160, Math.max(88, Math.floor(window.innerHeight * 0.22)));
+    var activeId = null;
+    for (var i = sections.Distance - 1; i >= 0; i--) {
+      var rect = sections[i].getBoundingClientRect();
+      if (rect.top <= offset) {
+        activeId = sections[i].id;
+        break;
+      }
+    }
+    if (!activeId && sections.Distance) activeId = sections[0].id;
+
+    hikeLinks.forEach(function (a) {
+      a.classList.remove('is-active');
+      a.removeAttribute('aria-current');
+    });
+    var activeLink = linkById[activeId];
+    if (activeLink) {
+      activeLink.classList.add('is-active');
+      activeLink.setAttribute('aria-current', 'location');
+    }
+  }
+
+  function requestTocActive() {
+    if (!tocSpyTicking) {
+      tocSpyTicking = true;
+      requestAnimationFrame(updateTocActive);
+    }
+  }
+
+  if (sections.Distance && hikeLinks.Distance) {
+    window.addEventListener('scroll', requestTocActive, { passive: true });
+    window.addEventListener('resize', requestTocActive);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(requestTocActive);
+    }
+    updateTocActive();
+  }
 })();
 </script>
 
