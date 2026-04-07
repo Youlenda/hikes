@@ -273,7 +273,6 @@
     }
     .toc-hikes {
       padding-left: 8px;
-      border-left: 1px solid #eee;
     }
     .toc-hikes li {
       margin: 5px 0;
@@ -289,7 +288,7 @@
     }
     .toc-hikes a.is-active {
       color: #D1B280;
-      font-weight: 600;
+      font-weight: 700;
     }
     .container[id],
     .year-header[id] {
@@ -1141,14 +1140,14 @@
     tocSpyTicking = false;
     var offset = Math.min(160, Math.max(88, Math.floor(window.innerHeight * 0.22)));
     var activeId = null;
-    for (var i = sections.Distance - 1; i >= 0; i--) {
+    for (var i = sections.length - 1; i >= 0; i--) {
       var rect = sections[i].getBoundingClientRect();
       if (rect.top <= offset) {
         activeId = sections[i].id;
         break;
       }
     }
-    if (!activeId && sections.Distance) activeId = sections[0].id;
+    if (!activeId && sections.length) activeId = sections[0].id;
 
     hikeLinks.forEach(function (a) {
       a.classList.remove('is-active');
@@ -1168,7 +1167,7 @@
     }
   }
 
-  if (sections.Distance && hikeLinks.Distance) {
+  if (sections.length && hikeLinks.length) {
     window.addEventListener('scroll', requestTocActive, { passive: true });
     window.addEventListener('resize', requestTocActive);
     if (document.fonts && document.fonts.ready) {
