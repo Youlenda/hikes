@@ -8,34 +8,66 @@
     html {
       box-sizing: border-box;
     }
+    :root {
+      --bg: #f3f1e8;
+      --text: #1f2a24;
+      --heading: #0f2419;
+      --accent: #6f8062;
+      --card: #ffffff;
+      --muted: #8d9587;
+      --header-banner-opacity: 0.1;
+    }
     *, *::before, *::after {
       box-sizing: inherit;
     }
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
-      background-color: #f7f7f7; /* Lighter background */
-      color: #444444; /* Darker text for better contrast */
+      background-color: var(--bg);
+      color: var(--text);
       margin: 0;
       padding: 0;
       line-height: 1.6;
     }
     header {
-      background-color: #211d19; /* Black Steel */
-      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      background-color: var(--heading);
+      padding: 52px 30px 56px;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(15, 36, 25, 0.12);
+    }
+    .header-banner {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .header-banner[hidden] {
+      display: none;
+    }
+    .header-banner img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: var(--header-banner-opacity);
+    }
+    .header-content {
+      position: relative;
+      z-index: 1;
     }
     header h1 {
       margin: 0;
       font-weight: 500;
       letter-spacing: 1px;
-      color: #D1B280; /* Gold Leaf — same as before */
+      color: var(--bg);
+      font-size: clamp(1.75rem, 4vw, 2.25rem);
     }
     header .header-tagline {
-      margin: 14px 0 0;
+      margin: 18px 0 0;
       font-size: 15px;
       font-weight: 400;
-      color: #f0e4d4; /* cream */
+      color: var(--muted);
       letter-spacing: 0.2px;
       line-height: 1.45;
       max-width: 28em;
@@ -45,10 +77,10 @@
     .container {
       max-width: 850px;
       margin: 40px auto;
-      background: #FFFFFF;
+      background: var(--card);
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 8px 20px rgba(15, 36, 25, 0.06);
       font-size: 15px;
       position: relative;
       transition: transform 0.2s, box-shadow 0.2s;
@@ -57,7 +89,7 @@
     }
     .container:hover {
       transform: translateY(0px);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 12px 25px rgba(15, 36, 25, 0.09);
     }
     .hike-header {
       margin-bottom: 20px;
@@ -107,20 +139,20 @@
     }
     .link a {
       text-decoration: none;
-      color: #D1B280;
+      color: var(--accent);
       font-weight: 500;
       border-bottom: 2px solid transparent;
       padding: 8px 16px;
       border-radius: 20px;
-      background-color: rgba(209, 178, 128, 0.1);
+      background-color: rgba(111, 128, 98, 0.12);
       transition: all 0.3s;
     }
     .link a:hover {
-      background-color: rgba(209, 178, 128, 0.2);
-      color: #594D46;
+      background-color: rgba(111, 128, 98, 0.22);
+      color: var(--heading);
     }
     .hike-date {
-      color: #888888;
+      color: var(--muted);
       font-size: 14px;
       margin-top: 0;
       margin-bottom: 10px;
@@ -130,7 +162,7 @@
       margin-bottom: 3px;
       margin-top: 5px;
       font-weight: 600;
-      color: #333333;
+      color: var(--heading);
       font-size: 30px;
     }
     .stats-container {
@@ -141,13 +173,13 @@
       margin-bottom: 20px;
     }
     .stat-box {
-      background-color: #f9f9f9;
+      background-color: var(--bg);
       border-radius: 8px;
       padding: 12px 15px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 2px 10px rgba(15, 36, 25, 0.05);
       min-width: 120px;
       text-align: center;
-      border-left: 3px solid #D1B280;
+      border-left: 3px solid var(--accent);
       flex: 1;
       transition: transform 0.2s;
     }
@@ -160,7 +192,7 @@
       margin-top: 4px;
     }
     .stat-box .label {
-      color: #777;
+      color: var(--muted);
       font-size: 13px;
     }
     .hike-content {
@@ -200,7 +232,7 @@
     }
     .year-header {
       max-width: 850px;
-      margin: 50px auto 0;
+      margin: 56px auto 0;
       padding: 0 10px;
       display: flex;
       align-items: center;
@@ -211,7 +243,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #888;
+      color: var(--muted);
       white-space: nowrap;
       margin: 0;
     }
@@ -219,7 +251,7 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: #e0e0e0;
+      background: rgba(141, 149, 135, 0.35);
     }
     .toc-drawer-state {
       position: absolute;
@@ -233,7 +265,7 @@
       border: 0;
     }
     .toc-drawer-state:focus-visible ~ .toc-fab {
-      outline: 2px solid #211d19;
+      outline: 2px solid var(--heading);
       outline-offset: 3px;
     }
     .toc-fab,
@@ -245,7 +277,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #888;
+      color: var(--muted);
       margin: 0 0 12px;
     }
     .toc ul {
@@ -264,30 +296,30 @@
       font-weight: 700;
       font-size: 12px;
       letter-spacing: 1px;
-      color: #594D46;
+      color: var(--heading);
       text-decoration: none;
       margin-bottom: 6px;
     }
     .toc .toc-year > a:hover {
-      color: #D1B280;
+      color: var(--accent);
     }
     .toc-hikes {
       padding-left: 8px;
     }
     .toc-hikes li {
-      margin: 5px 0;
-      line-height: 1.35;
+      margin: 1px 0;
+      line-height: 1.25;
     }
     .toc-hikes a {
-      color: #666;
+      color: var(--muted);
       text-decoration: none;
       font-size: 12px;
     }
     .toc-hikes a:hover {
-      color: #D1B280;
+      color: var(--accent);
     }
     .toc-hikes a.is-active {
-      color: #D1B280;
+      color: var(--accent);
       font-weight: 700;
     }
     .container[id],
@@ -311,10 +343,10 @@
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 0.5px;
-        color: #211d19;
-        background: #D1B280;
+        color: var(--card);
+        background: var(--accent);
         border-radius: 24px;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+        box-shadow: 0 4px 18px rgba(15, 36, 25, 0.18);
         cursor: pointer;
         font-family: inherit;
         border: none;
@@ -327,7 +359,7 @@
         position: fixed;
         inset: 0;
         z-index: 199;
-        background: rgba(33, 29, 25, 0.42);
+        background: rgba(15, 36, 25, 0.42);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.25s ease;
@@ -351,11 +383,11 @@
         max-height: min(78vh, 520px);
         margin: 0;
         padding: 20px 22px calc(24px + env(safe-area-inset-bottom, 0px));
-        background: #fff;
+        background: var(--card);
         border-radius: 16px 16px 0 0;
-        box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.14);
+        box-shadow: 0 -10px 40px rgba(15, 36, 25, 0.12);
         border: none;
-        border-top: 3px solid #D1B280;
+        border-top: 3px solid var(--accent);
         z-index: 200;
         font-size: 14px;
         overflow-y: auto;
@@ -388,18 +420,18 @@
         display: block;
         position: fixed;
         left: max(10px, calc(50vw - 425px - 16px - 188px));
-        top: 50%;
-        transform: translateY(-50%);
+        top: 220px;
+        transform: none;
         width: 188px;
-        max-height: min(78vh, 640px);
+        max-height: calc(100vh - 244px);
         overflow-y: auto;
         padding: 16px 14px;
         margin: 0;
-        background: #fff;
+        background: var(--card);
         border-radius: 10px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 24px rgba(15, 36, 25, 0.08);
         border: none;
-        border-left: 3px solid #D1B280;
+        border-left: 3px solid var(--accent);
         z-index: 10;
         font-size: 13px;
         -webkit-overflow-scrolling: touch;
@@ -412,8 +444,14 @@
 <input type="checkbox" id="toc-drawer-state" class="toc-drawer-state" aria-controls="site-toc">
 
 <header>
-  <h1>Trail Journal</h1>
-  <p class="header-tagline">Where I keep track of hikes and nights under the stars.</p>
+  <!-- Wide transparent PNG — e.g. panorama; opacity via --header-banner-opacity (0.1 = 10% visible) -->
+  <div class="header-banner" hidden>
+    <img src="./images/header-banner.png" alt="">
+  </div>
+  <div class="header-content">
+    <h1>Trail Journal</h1>
+    <p class="header-tagline">Where I keep track of hikes and nights under the stars.</p>
+  </div>
 </header>
 
 <label for="toc-drawer-state" class="toc-fab">Hikes</label>
@@ -425,6 +463,8 @@
     <li class="toc-year">
       <a href="#year-2026">2026</a>
       <ul class="toc-hikes">
+        <li><a href="#myra-canyon-trestles">Myra Canyon Trestles</a></li>
+        <li><a href="#grouse-grind">Grouse Grind</a></li>
         <li><a href="#chief">Chief First Peak</a></li>
         <li><a href="#killarney-lake">Killarney Lake</a></li>
       </ul>
@@ -458,6 +498,92 @@
 </nav>
 
 <div class="year-header" id="year-2026"><h2>2026</h2></div>
+
+<div class="container" id="myra-canyon-trestles">
+  <div class="hike-header">
+    <h2 class="hike-title">Myra Canyon Trestles</h2>
+    <p class="hike-date">May 19, 2026</p>
+  </div>
+  <div class="hike-content">
+    <div class="hike-content-left">
+      <div class="vertical-image-container">
+        <img src="./images/2026/myra-v.png" alt="Myra Canyon Trestles View">
+      </div>
+    </div>
+    <div class="hike-content-right">
+      <div class="hike-details">
+        <div class="stats-container">
+          <div class="stat-box">
+            <div class="label">Distance</div>
+            <div class="value">7.8km</div>
+          </div>
+          <div class="stat-box">
+            <div class="label">Elevation Gain</div>
+            <div class="value">37m</div>
+          </div>
+          <div class="stat-box">
+            <div class="label">Duration</div>
+            <div class="value">2h 9m</div>
+          </div>
+        </div>
+        <div class="info">
+          <p><strong>Location:</strong> Kelowna, BC</p>
+          <p><strong>Active Calories:</strong> 304cal</p>
+          <p><strong>Hiking Buddies:</strong> -</p>
+        </div>
+        <div class="link">
+          <a href="https://www.alltrails.com/trail/canada/british-columbia/myra-kettle-valley-to-trestle-4" target="_blank">View Hike on AllTrails</a>
+        </div>
+      </div>
+      <div class="horizontal-image-container">
+        <img src="./images/2026/myra-h.png" alt="Hike Photo">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="grouse-grind">
+  <div class="hike-header">
+    <h2 class="hike-title">Grouse Grind</h2>
+    <p class="hike-date">May 17, 2026</p>
+  </div>
+  <div class="hike-content">
+    <div class="hike-content-left">
+      <div class="vertical-image-container">
+        <img src="./images/2026/grouse_grind-v.png" alt="Grouse Grind View">
+      </div>
+    </div>
+    <div class="hike-content-right">
+      <div class="hike-details">
+        <div class="stats-container">
+          <div class="stat-box">
+            <div class="label">Distance</div>
+            <div class="value">3.3km</div>
+          </div>
+          <div class="stat-box">
+            <div class="label">Elevation Gain</div>
+            <div class="value">772m</div>
+          </div>
+          <div class="stat-box">
+            <div class="label">Duration</div>
+            <div class="value">1h 40m</div>
+          </div>
+        </div>
+        <div class="info">
+          <p><strong>Location:</strong> North Vancouver, BC</p>
+          <p><strong>Active Calories:</strong> 544cal</p>
+          <p><strong>Hiking Buddies:</strong> -</p>
+        </div>
+        <div class="link">
+          <a href="https://www.alltrails.com/trail/canada/british-columbia/grouse-grind-trail" target="_blank">View Hike on AllTrails</a>
+        </div>
+      </div>
+      <div class="horizontal-image-container">
+        <img src="./images/2026/grouse_grind-h.png" alt="Hike Photo">
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container" id="chief">
   <div class="hike-header">
@@ -1214,6 +1340,44 @@
     if (a) cb.checked = false;
   });
   syncTocAria();
+
+  var headerBanner = document.querySelector('.header-banner');
+  var headerBannerImg = headerBanner && headerBanner.querySelector('img');
+  if (headerBanner && headerBannerImg) {
+    function showHeaderBanner() {
+      headerBanner.hidden = false;
+    }
+    function hideHeaderBanner() {
+      headerBanner.hidden = true;
+    }
+    headerBannerImg.addEventListener('load', showHeaderBanner);
+    headerBannerImg.addEventListener('error', hideHeaderBanner);
+    if (headerBannerImg.complete && headerBannerImg.naturalWidth > 0) {
+      showHeaderBanner();
+    }
+  }
+
+  var desktopMq = window.matchMedia('(min-width: 1260px)');
+  var yearHeader = document.getElementById('year-2026');
+
+  function positionDesktopToc() {
+    if (!yearHeader || !desktopMq.matches) {
+      toc.style.top = '';
+      toc.style.maxHeight = '';
+      return;
+    }
+    var gap = 16;
+    var top = yearHeader.offsetTop + yearHeader.offsetHeight + gap;
+    toc.style.top = top + 'px';
+    toc.style.maxHeight = 'calc(100vh - ' + (top + 24) + 'px)';
+  }
+
+  desktopMq.addEventListener('change', positionDesktopToc);
+  window.addEventListener('resize', positionDesktopToc);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(positionDesktopToc);
+  }
+  positionDesktopToc();
 
   var sections = [].slice.call(document.querySelectorAll('.container[id]'));
   var hikeLinks = toc.querySelectorAll('.toc-hikes a[href^="#"]');
