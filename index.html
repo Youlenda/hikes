@@ -314,7 +314,7 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       color: var(--muted);
-      margin: 0 0 12px;
+      margin: 0 0 2px;
     }
     .toc ul {
       list-style: none;
@@ -322,7 +322,7 @@
       padding: 0;
     }
     .toc .toc-year {
-      margin-bottom: 14px;
+      margin-bottom: 4px;
     }
     .toc .toc-year:last-child {
       margin-bottom: 0;
@@ -334,7 +334,7 @@
       letter-spacing: 1px;
       color: var(--heading);
       text-decoration: none;
-      margin-bottom: 6px;
+      margin-bottom: 1px;
     }
     .toc .toc-year > a:hover {
       color: var(--accent);
@@ -346,16 +346,17 @@
       padding-left: 8px;
     }
     .toc-hikes li {
-      margin: 1px 0;
-      line-height: 1.25;
+      margin: 0;
+      line-height: 1.2;
     }
     .toc-hikes a {
       display: block;
-      padding: 3px 4px;
+      padding: 1px 2px;
       border-radius: 4px;
       color: var(--muted);
       text-decoration: none;
-      font-size: 12px;
+      font-size: 11px;
+      white-space: nowrap;
     }
     .toc-hikes a:hover {
       color: var(--accent);
@@ -363,6 +364,38 @@
     .toc-hikes a.is-active {
       color: var(--accent);
       font-weight: 700;
+    }
+    .rankings-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin: 0 0 2px;
+    }
+    .rankings-line {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+    .rankings-line a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .rankings-line a:hover {
+      color: var(--accent);
+    }
+    .rankings-line a.is-active {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .rankings-line .rank-label {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      color: var(--heading);
     }
     .container[id],
     .year-header[id] {
@@ -379,7 +412,7 @@
       font-weight: 700;
       letter-spacing: 0.5px;
       color: var(--muted);
-      margin: 0 0 12px;
+      margin: 0 0 2px;
     }
     .trail-map-frame {
       position: relative;
@@ -402,47 +435,49 @@
       cursor: grabbing;
     }
     .trail-map-tools {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 8px;
+      display: none;
     }
     .trail-map-controls {
+      position: absolute;
+      z-index: 2;
       display: flex;
-      gap: 4px;
-      flex: 0 0 auto;
+      gap: 3px;
+      pointer-events: none;
+    }
+    .trail-map-controls[data-map-zoom-group="inout"] {
+      left: 5px;
+      top: 5px;
+    }
+    .trail-map-controls[data-map-zoom-group="fit"] {
+      right: 5px;
+      top: 5px;
     }
     .trail-map-controls button {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 0;
       font: inherit;
-      font-size: 14px;
+      font-size: 12px;
       line-height: 1;
       color: var(--heading);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.88);
       border: 1px solid rgba(15, 36, 25, 0.16);
-      border-radius: 5px;
+      border-radius: 3px;
       cursor: pointer;
+      box-shadow: 0 1px 3px rgba(15, 36, 25, 0.12);
+      pointer-events: auto;
     }
     .trail-map-controls button:hover {
       background: #fff;
       border-color: var(--accent);
     }
     .trail-map-controls svg {
-      width: 11px;
-      height: 11px;
+      width: 9px;
+      height: 9px;
       display: block;
-    }
-    .trail-map-hint {
-      margin: 0;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.3;
     }
     .trail-map-province {
       stroke: rgba(15, 36, 25, 0.28);
@@ -486,6 +521,9 @@
       cursor: pointer;
       outline: none;
     }
+    .trail-map-marker.is-active {
+      z-index: 2;
+    }
     .trail-map-marker circle {
       fill: #c76f4d;
       stroke: var(--card);
@@ -516,7 +554,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px 10px;
-      margin: 10px 0 0;
+      margin: 4px 0 0;
       padding: 0;
       list-style: none;
       color: var(--muted);
@@ -618,8 +656,15 @@
       .toc .toc-year > a {
         font-size: 13px;
       }
-      .toc-hikes a {
-        font-size: 13px;
+      .toc-hikes a,
+      .rankings-line {
+        font-size: 11px;
+      }
+      .rankings {
+        display: block;
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(141, 149, 135, 0.28);
       }
     }
     /* TOC in the left margin of the centered 850px column; no layout shift */
@@ -657,7 +702,7 @@
         height: var(--desktop-entry-height);
         max-height: var(--desktop-entry-height);
         overflow: hidden;
-        padding: 16px 14px;
+        padding: 12px 10px;
         margin: 0;
         background: var(--card);
         border-radius: 10px;
@@ -673,14 +718,24 @@
         flex: 1 1 auto;
         min-height: 0;
         overflow-y: auto;
-        padding-bottom: 8px;
+        padding-bottom: 2px;
+      }
+      .rankings {
+        display: block;
+        flex: 0 0 auto;
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 1px solid rgba(141, 149, 135, 0.28);
       }
       .trail-map {
         display: block;
         flex: 0 0 auto;
-        margin-top: 16px;
-        padding-top: 14px;
+        margin-top: 4px;
+        padding-top: 4px;
         border-top: 1px solid rgba(141, 149, 135, 0.28);
+      }
+      .toc .trail-map-key {
+        padding-top: 4px;
       }
     }
   </style>
@@ -744,6 +799,11 @@
     </li>
   </ul>
 
+  <aside class="rankings" id="hike-rankings" aria-label="Hike rankings">
+    <p class="rankings-title">Rankings</p>
+    <p class="rankings-line"></p>
+  </aside>
+
   <aside class="trail-map" id="trail-map" aria-label="Hike map">
   <p class="trail-map-title">Hike Map</p>
   <div class="trail-map-frame">
@@ -771,8 +831,8 @@
         <text class="trail-map-place" x="107" y="189.6">Victoria</text>
       </g>
 
-      <a class="trail-map-marker" data-year="2026" href="#canso-bomber-ruins" aria-label="Canso Bomber Ruins Trail, Tofino, BC">
-        <title>Canso Bomber Ruins Trail</title>
+      <a class="trail-map-marker" data-year="2026" href="#canso-bomber-ruins" aria-label="Canso Bomber Ruins, Tofino, BC">
+        <title>Canso Bomber Ruins</title>
         <circle cx="81.8" cy="178.0" r="3"></circle>
       </a>
       <a class="trail-map-marker" data-year="2026" href="#upper-gold-creek" aria-label="Upper Gold Creek, Golden Ears, BC">
@@ -833,7 +893,7 @@
         <title>Lighthouse Park</title>
         <circle cx="117.7" cy="172.9" r="3"></circle>
       </a>
-      <a class="trail-map-marker" data-year="2024" href="#garibaldi-lake" aria-label="Garibaldi Lake, BC">
+      <a class="trail-map-marker" data-year="2024" href="#garibaldi-lake" aria-label="Garibaldi Lake, Garibaldi Provincial Park, BC">
         <title>Garibaldi Lake</title>
         <circle cx="121.1" cy="159.9" r="3"></circle>
       </a>
@@ -858,12 +918,11 @@
         <circle cx="222.7" cy="130.8" r="3"></circle>
       </a>
     </svg>
-  </div>
-  <div class="trail-map-tools">
-    <p class="trail-map-hint">Drag to explore</p>
-    <div class="trail-map-controls">
+    <div class="trail-map-controls" data-map-zoom-group="inout">
       <button type="button" data-map-zoom="out" aria-label="Zoom out" title="Zoom out">&minus;</button>
       <button type="button" data-map-zoom="in" aria-label="Zoom in" title="Zoom in">+</button>
+    </div>
+    <div class="trail-map-controls" data-map-zoom-group="fit">
       <button type="button" data-map-zoom="fit" aria-label="Show all hikes" title="Show all hikes">
         <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">
           <path d="M1 4V1h3M11 4V1H8M1 8v3h3M11 8v3H8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -881,15 +940,15 @@
 
 <div class="year-header" id="year-line"><h2 id="year-line-label">2026</h2></div>
 
-<div class="container" id="canso-bomber-ruins">
+<div class="container" id="canso-bomber-ruins" data-at-km="8.0" data-at-m="256">
   <div class="hike-header">
-    <h2 class="hike-title">Canso Bomber Ruins Trail</h2>
+    <h2 class="hike-title">Canso Bomber Ruins</h2>
     <p class="hike-date">July 21, 2026</p>
   </div>
   <div class="hike-content">
     <div class="hike-content-left">
       <div class="vertical-image-container">
-        <img src="./images/2026/canso_bomber_ruins-v.png" alt="Canso Bomber Ruins Trail View">
+        <img src="./images/2026/canso_bomber_ruins-v.png" alt="Canso Bomber Ruins View">
       </div>
     </div>
     <div class="hike-content-right">
@@ -924,7 +983,7 @@
   </div>
 </div>
 
-<div class="container" id="upper-gold-creek">
+<div class="container" id="upper-gold-creek" data-at-km="10.3" data-at-m="389">
   <div class="hike-header">
     <h2 class="hike-title">Upper Gold Creek</h2>
     <p class="hike-date">June 15, 2026</p>
@@ -967,7 +1026,7 @@
   </div>
 </div>
 
-<div class="container" id="myra-canyon-trestles">
+<div class="container" id="myra-canyon-trestles" data-at-km="13.2" data-at-m="367">
   <div class="hike-header">
     <h2 class="hike-title">Myra Canyon Trestles</h2>
     <p class="hike-date">May 19, 2026</p>
@@ -1010,7 +1069,7 @@
   </div>
 </div>
 
-<div class="container" id="grouse-grind">
+<div class="container" id="grouse-grind" data-at-km="2.1" data-at-m="780">
   <div class="hike-header">
     <h2 class="hike-title">Grouse Grind</h2>
     <p class="hike-date">May 17, 2026</p>
@@ -1053,7 +1112,7 @@
   </div>
 </div>
 
-<div class="container" id="chief">
+<div class="container" id="chief" data-at-km="3.9" data-at-m="534">
   <div class="hike-header">
     <h2 class="hike-title">Chief First Peak</h2>
     <p class="hike-date">April 11, 2026</p>
@@ -1096,7 +1155,7 @@
   </div>
 </div>
 
-<div class="container" id="killarney-lake">
+<div class="container" id="killarney-lake" data-at-km="7.2" data-at-m="2">
   <div class="hike-header">
     <h2 class="hike-title">Killarney Lake</h2>
     <p class="hike-date">April 5, 2026</p>
@@ -1139,7 +1198,7 @@
   </div>
 </div>
 
-<div class="container" id="quarry-rock-2025">
+<div class="container" id="quarry-rock-2025" data-at-km="4.0" data-at-m="198">
   <div class="hike-header">
     <h2 class="hike-title">Quarry Rock</h2>
     <p class="hike-date">November 29, 2025</p>
@@ -1167,7 +1226,7 @@
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> Coquitlam, BC</p>
+          <p><strong>Location:</strong> North Vancouver, BC</p>
           <p><strong>Active Calories:</strong> 378cal</p>
           <p><strong>Hiking Buddies:</strong> Mo</p>
         </div>
@@ -1182,7 +1241,7 @@
   </div>
 </div>
 
-<div class="container" id="bowen-lookout">
+<div class="container" id="bowen-lookout" data-at-km="4.8" data-at-m="148">
   <div class="hike-header">
     <h2 class="hike-title">Bowen Lookout</h2>
     <p class="hike-date">August 31, 2025</p>
@@ -1225,7 +1284,7 @@
   </div>
 </div>
 
-<div class="container" id="lindeman-lake">
+<div class="container" id="lindeman-lake" data-at-km="3.7" data-at-m="230">
   <div class="hike-header">
     <h2 class="hike-title">Lindeman Lake</h2>
     <p class="hike-date">August 9–10, 2025</p>
@@ -1268,7 +1327,7 @@
   </div>
 </div>
 
-<div class="container" id="elfin-lakes">
+<div class="container" id="elfin-lakes" data-at-km="20.8" data-at-m="808">
   <div class="hike-header">
     <h2 class="hike-title">Elfin Lakes</h2>
     <p class="hike-date">June 28–29, 2025</p>
@@ -1311,7 +1370,7 @@
   </div>
 </div>
 
-<div class="container" id="golden-ears">
+<div class="container" id="golden-ears" data-at-km="5.3" data-at-m="113">
   <div class="hike-header">
     <h2 class="hike-title">Golden Ears</h2>
     <p class="hike-date">May 30–31, 2025</p>
@@ -1354,7 +1413,7 @@
   </div>
 </div>
 
-<div class="container" id="kennedy-falls">
+<div class="container" id="kennedy-falls" data-at-km="10.1" data-at-m="426">
   <div class="hike-header">
     <h2 class="hike-title">Kennedy Falls</h2>
     <p class="hike-date">April 19, 2025</p>
@@ -1397,7 +1456,7 @@
   </div>
 </div>
 
-<div class="container" id="joffre-lakes">
+<div class="container" id="joffre-lakes" data-at-km="7.2" data-at-m="485">
   <div class="hike-header">
     <h2 class="hike-title">Joffre Lakes</h2>
     <p class="hike-date">October 13, 2024</p>
@@ -1440,7 +1499,7 @@
   </div>
 </div>
 
-<div class="container" id="minnekhada">
+<div class="container" id="minnekhada" data-at-km="6.8" data-at-m="250">
   <div class="hike-header">
     <h2 class="hike-title">Minnekhada</h2>
     <p class="hike-date">October 5, 2024</p>
@@ -1483,7 +1542,7 @@
   </div>
 </div>
 
-<div class="container" id="lighthouse-park">
+<div class="container" id="lighthouse-park" data-at-km="5.3" data-at-m="240">
   <div class="hike-header">
     <h2 class="hike-title">Lighthouse Park</h2>
     <p class="hike-date">September 21, 2024</p>
@@ -1526,7 +1585,7 @@
   </div>
 </div>
 
-<div class="container" id="garibaldi-lake">
+<div class="container" id="garibaldi-lake" data-at-km="18.2" data-at-m="979">
   <div class="hike-header">
     <h2 class="hike-title">Garibaldi Lake</h2>
     <p class="hike-date">September 12, 2024</p>
@@ -1554,7 +1613,7 @@
           </div>
         </div>
         <div class="info">
-          <p><strong>Location:</strong> BC</p>
+          <p><strong>Location:</strong> Garibaldi Provincial Park, BC</p>
           <p><strong>Active Calories:</strong> 1350cal</p>
           <p><strong>Hiking Buddies:</strong> -</p>
         </div>
@@ -1569,7 +1628,7 @@
   </div>
 </div>
 
-<div class="container" id="eagle-bluffs">
+<div class="container" id="eagle-bluffs" data-at-km="8.2" data-at-m="437">
   <div class="hike-header">
     <h2 class="hike-title">Eagle Bluffs</h2>
     <p class="hike-date">August 25, 2024</p>
@@ -1612,7 +1671,7 @@
   </div>
 </div>
 
-<div class="container" id="tunnel-bluffs">
+<div class="container" id="tunnel-bluffs" data-at-km="11.6" data-at-m="467">
   <div class="hike-header">
     <h2 class="hike-title">Tunnel Bluffs</h2>
     <p class="hike-date">August 3, 2024</p>
@@ -1655,7 +1714,7 @@
   </div>
 </div>
 
-<div class="container" id="lynn-canyon-rice-lake">
+<div class="container" id="lynn-canyon-rice-lake" data-at-km="5.8" data-at-m="148">
   <div class="hike-header">
     <h2 class="hike-title">Lynn Canyon & Rice Lake</h2>
     <p class="hike-date">July 13, 2024</p>
@@ -1698,7 +1757,7 @@
   </div>
 </div>
 
-<div class="container" id="quarry-rock-2024">
+<div class="container" id="quarry-rock-2024" data-at-km="4.0" data-at-m="198">
   <div class="hike-header">
     <h2 class="hike-title">Quarry Rock</h2>
     <p class="hike-date">June 8, 2024</p>
@@ -1741,7 +1800,7 @@
   </div>
 </div>
 
-<div class="container" id="johnston-canyon-upper-falls">
+<div class="container" id="johnston-canyon-upper-falls" data-at-km="5.6" data-at-m="276">
   <div class="hike-header">
     <h2 class="hike-title">Johnston Canyon</h2>
     <p class="hike-date">June 1, 2024</p>
@@ -1825,6 +1884,7 @@
   var coverHeader = document.querySelector('header');
   var firstHike = document.querySelector('.container[id]');
   var trailMap = document.getElementById('trail-map');
+  var rankings = document.getElementById('hike-rankings');
   var yearLine = document.getElementById('year-line');
   var yearLabel = document.getElementById('year-line-label');
   var railTop = 0;
@@ -1879,6 +1939,7 @@
   var hikeLinks = toc.querySelectorAll('.toc-hikes a[href^="#"]');
   var yearLinks = toc.querySelectorAll('.toc-year > a[href^="#"]');
   var mapLinks = trailMap ? trailMap.querySelectorAll('.trail-map-marker[href^="#"]') : [];
+  var rankingLinks = [];
   var linkById = {};
   var mapMarkerById = {};
   hikeLinks.forEach(function (a) {
@@ -1889,6 +1950,72 @@
     var id = a.getAttribute('href').slice(1);
     mapMarkerById[id] = a;
   });
+
+  function trailKey(section) {
+    var link = section.querySelector('.link a[href*="alltrails"]');
+    return link ? link.getAttribute('href').replace(/\/$/, '') : section.id;
+  }
+
+  function collectHikeStats() {
+    var seenTrail = {};
+    var hikes = [];
+    sections.forEach(function (section) {
+      var km = parseFloat(section.getAttribute('data-at-km'));
+      var elev = parseFloat(section.getAttribute('data-at-m'));
+      if (!(km > 0) || !(elev >= 0)) return;
+      var key = trailKey(section);
+      if (seenTrail[key]) return;
+      seenTrail[key] = true;
+      var titleEl = section.querySelector('.hike-title');
+      var title = titleEl ? titleEl.textContent.trim() : section.id;
+      hikes.push({
+        id: section.id,
+        label: title,
+        distance: km,
+        elevation: elev,
+        steepness: elev / km
+      });
+    });
+    return hikes;
+  }
+
+  function ranked(hikes, key, limit) {
+    return hikes
+      .filter(function (hike) { return hike[key] > 0; })
+      .slice()
+      .sort(function (a, b) { return b[key] - a[key]; })
+      .slice(0, limit);
+  }
+
+  function escapeHtml(text) {
+    return String(text)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function rankingChip(label, hike) {
+    if (!hike) return '';
+    return '<a href="#' + hike.id + '"><span class="rank-label">' + escapeHtml(label) + '</span> ' +
+      escapeHtml(hike.label) + '</a>';
+  }
+
+  function buildRankings() {
+    if (!rankings) return;
+    var line = rankings.querySelector('.rankings-line');
+    if (!line) return;
+    var hikes = collectHikeStats();
+    var parts = [
+      rankingChip('Highest', ranked(hikes, 'elevation', 1)[0]),
+      rankingChip('Longest', ranked(hikes, 'distance', 1)[0]),
+      rankingChip('Steepest', ranked(hikes, 'steepness', 1)[0])
+    ].filter(Boolean);
+    line.innerHTML = parts.join('');
+    rankingLinks = [].slice.call(rankings.querySelectorAll('a[href^="#"]'));
+  }
+
+  buildRankings();
 
   // The last hike sits at the end of the document, so on its own it can never scroll
   // high enough to reach the alignment line — which also kept the spy from ever
@@ -1946,6 +2073,12 @@
       a.classList.remove('is-active');
       a.removeAttribute('aria-current');
     });
+    rankingLinks.forEach(function (a) {
+      var isActive = a.getAttribute('href') === '#' + activeId;
+      a.classList.toggle('is-active', isActive);
+      if (isActive) a.setAttribute('aria-current', 'location');
+      else a.removeAttribute('aria-current');
+    });
     var activeLink = linkById[activeId];
     if (activeLink) {
       activeLink.classList.add('is-active');
@@ -1956,6 +2089,7 @@
     if (activeMarker) {
       activeMarker.classList.add('is-active');
       activeMarker.setAttribute('aria-current', 'location');
+      if (activeMarker.parentNode) activeMarker.parentNode.appendChild(activeMarker);
     }
   }
 
