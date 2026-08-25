@@ -15,24 +15,40 @@
       --accent: #6f8062;
       --card: #ffffff;
       --muted: #8d9587;
-      --header-banner-opacity: 0.1;
+      --font-sans: 'Helvetica Neue', Arial, sans-serif;
+      --header-banner-opacity: 0.3;
+      --hike-dim-opacity: 0.55;
+      --hike-dim-blur: 1.2px;
+      --cover-height: 164px;
+      --year-line-height: 34px;
+      --rail-gap: 6px;
+      --content-gap: 8px;
+      --desktop-entry-height: min(680px, calc(100vh - var(--cover-height) - var(--year-line-height) - var(--rail-gap) - 16px));
     }
     *, *::before, *::after {
       box-sizing: inherit;
     }
     body {
-      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-family: var(--font-sans);
       background-color: var(--bg);
       color: var(--text);
       margin: 0;
-      padding: 0;
+      padding: calc(var(--cover-height) + var(--year-line-height) + var(--content-gap)) 0 0;
       line-height: 1.6;
     }
+    button,
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+    }
     header {
-      position: relative;
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 100;
       overflow: hidden;
       background-color: var(--heading);
-      padding: 52px 30px 56px;
+      padding: 38px 30px 34px;
       text-align: center;
       box-shadow: 0 2px 10px rgba(15, 36, 25, 0.12);
     }
@@ -64,7 +80,7 @@
       font-size: clamp(1.75rem, 4vw, 2.25rem);
     }
     header .header-tagline {
-      margin: 18px 0 0;
+      margin: 10px 0 0;
       font-size: 15px;
       font-weight: 400;
       color: var(--muted);
@@ -76,14 +92,14 @@
     }
     .container {
       max-width: 850px;
-      margin: 40px auto;
+      margin: 0 auto 12px;
       background: var(--card);
-      padding: 30px;
+      padding: 18px;
       border-radius: 12px;
       box-shadow: 0 8px 20px rgba(15, 36, 25, 0.06);
       font-size: 15px;
       position: relative;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.35s ease, filter 0.35s ease;
       display: flex;
       flex-direction: column;
     }
@@ -91,8 +107,22 @@
       transform: translateY(0px);
       box-shadow: 0 12px 25px rgba(15, 36, 25, 0.09);
     }
+    /* Everything except the hike you're reading recedes. */
+    .container.is-dimmed {
+      opacity: var(--hike-dim-opacity);
+      filter: blur(var(--hike-dim-blur));
+    }
+    .container.is-dimmed:hover {
+      opacity: 0.9;
+      filter: blur(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .container {
+        transition: none;
+      }
+    }
     .hike-header {
-      margin-bottom: 20px;
+      margin-bottom: 4px;
     }
     .horizontal-image-container {
       width: 100%;
@@ -113,7 +143,7 @@
     .vertical-image-container {
       width: 100%;
       position: relative;
-      padding-top: 177.78%; /* 9:16 aspect ratio */
+      padding-top: 150%; /* 2:3 aspect ratio */
       overflow: hidden;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -127,22 +157,22 @@
       object-fit: cover;
     }
     .info {
-      margin-top: 20px;
+      margin-top: 4px;
     }
     .info p {
-      margin: 6px 0;
-      line-height: 1.6;
+      margin: 3px 0;
+      line-height: 1.45;
     }
     .link {
-      margin-top: 20px;
-      margin-bottom: 30px; /* Increased bottom margin */
+      margin-top: 8px;
+      margin-bottom: 8px;
     }
     .link a {
       text-decoration: none;
       color: var(--accent);
       font-weight: 500;
       border-bottom: 2px solid transparent;
-      padding: 8px 16px;
+      padding: 6px 12px;
       border-radius: 20px;
       background-color: rgba(111, 128, 98, 0.12);
       transition: all 0.3s;
@@ -154,30 +184,30 @@
     .hike-date {
       color: var(--muted);
       font-size: 14px;
-      margin-top: 0;
-      margin-bottom: 10px;
+      line-height: 1.3;
+      margin: 0 0 4px;
       font-weight: normal;
     }
     .hike-title {
-      margin-bottom: 3px;
-      margin-top: 5px;
+      margin: 0;
       font-weight: 600;
       color: var(--heading);
-      font-size: 30px;
+      font-size: 28px;
+      line-height: 1.2;
     }
     .stats-container {
       display: flex;
       flex-direction: row;
-      gap: 15px;
-      margin-top: 20px;
-      margin-bottom: 20px;
+      gap: 10px;
+      margin-top: 0;
+      margin-bottom: 8px;
     }
     .stat-box {
       background-color: var(--bg);
       border-radius: 8px;
-      padding: 12px 15px;
+      padding: 8px 10px;
       box-shadow: 0 2px 10px rgba(15, 36, 25, 0.05);
-      min-width: 120px;
+      min-width: 0;
       text-align: center;
       border-left: 3px solid var(--accent);
       flex: 1;
@@ -189,7 +219,7 @@
     .stat-box .value {
       font-weight: 600;
       font-size: 16px;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .stat-box .label {
       color: var(--muted);
@@ -203,7 +233,7 @@
     @media (min-width: 768px) {
       .hike-content {
         flex-direction: row;
-        gap: 30px;
+        gap: 20px;
       }
     }
     .hike-content-left, .hike-content-right {
@@ -215,15 +245,15 @@
     }
     .hike-content-right {
       flex: 1;
-      display: flex; /* Ensure it's a flex container */
-      flex-direction: column; /* Stack children vertically */
-      justify-content: space-between; /* Push content apart */
-    }
-    .hike-details {
-      flex: 1; /* Allow this section to grow */
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Align items to the start */
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    .hike-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
     }
     .images-gallery {
       display: flex;
@@ -231,12 +261,19 @@
       gap: 20px;
     }
     .year-header {
+      position: fixed;
+      top: var(--cover-height);
+      left: 0;
+      right: 0;
+      z-index: 90;
       max-width: 850px;
-      margin: 56px auto 0;
-      padding: 0 10px;
+      margin: 0 auto;
+      padding: 5px 10px 7px;
       display: flex;
       align-items: center;
       gap: 16px;
+      background: var(--bg);
+      box-shadow: 0 8px 12px 4px var(--bg);
     }
     .year-header h2 {
       font-size: 13px;
@@ -273,10 +310,9 @@
       display: none;
     }
     .toc .toc-title {
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: var(--muted);
       margin: 0 0 12px;
     }
@@ -303,6 +339,9 @@
     .toc .toc-year > a:hover {
       color: var(--accent);
     }
+    .toc .toc-year > a.is-active {
+      color: var(--accent);
+    }
     .toc-hikes {
       padding-left: 8px;
     }
@@ -311,6 +350,9 @@
       line-height: 1.25;
     }
     .toc-hikes a {
+      display: block;
+      padding: 3px 4px;
+      border-radius: 4px;
       color: var(--muted);
       text-decoration: none;
       font-size: 12px;
@@ -324,10 +366,180 @@
     }
     .container[id],
     .year-header[id] {
-      scroll-margin-top: 16px;
+      scroll-margin-top: var(--hike-scroll-margin, 16px);
     }
     .toc {
       display: none;
+    }
+    .trail-map {
+      display: none;
+    }
+    .trail-map-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin: 0 0 12px;
+    }
+    .trail-map-frame {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid rgba(141, 149, 135, 0.24);
+      background: #d8e8e5;
+    }
+    .trail-map-frame > svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .trail-map-frame.is-panning > svg {
+      cursor: grabbing;
+    }
+    .trail-map-tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .trail-map-controls {
+      display: flex;
+      gap: 4px;
+      flex: 0 0 auto;
+    }
+    .trail-map-controls button {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      font: inherit;
+      font-size: 14px;
+      line-height: 1;
+      color: var(--heading);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(15, 36, 25, 0.16);
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .trail-map-controls button:hover {
+      background: #fff;
+      border-color: var(--accent);
+    }
+    .trail-map-controls svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+    }
+    .trail-map-hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.3;
+    }
+    .trail-map-province {
+      stroke: rgba(15, 36, 25, 0.28);
+      stroke-width: 1.2;
+      vector-effect: non-scaling-stroke;
+    }
+    .trail-map-bc {
+      fill: #e8ead9;
+    }
+    .trail-map-ab {
+      fill: #dce6cf;
+    }
+    .trail-map-island {
+      fill: #d9e0c5;
+    }
+    .trail-map-us {
+      fill: #e4e2d6;
+    }
+    .trail-map-places {
+      transition: opacity 0.2s ease;
+    }
+    .trail-map-place {
+      fill: rgba(15, 36, 25, 0.6);
+      font-weight: 600;
+      text-anchor: middle;
+      pointer-events: none;
+    }
+    .trail-map-border {
+      fill: none;
+      stroke: rgba(15, 36, 25, 0.22);
+      stroke-width: 1;
+      vector-effect: non-scaling-stroke;
+    }
+    .trail-map-label {
+      fill: rgba(15, 36, 25, 0.46);
+      font-size: 6px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .trail-map-marker {
+      cursor: pointer;
+      outline: none;
+    }
+    .trail-map-marker circle {
+      fill: #c76f4d;
+      stroke: var(--card);
+      stroke-width: 2;
+      transform-box: fill-box;
+      transform-origin: center;
+      transition: transform 0.16s ease, stroke 0.16s ease, stroke-width 0.16s ease, filter 0.16s ease;
+      vector-effect: non-scaling-stroke;
+    }
+    .trail-map-marker[data-year="2025"] circle {
+      fill: #4d8390;
+    }
+    .trail-map-marker[data-year="2024"] circle {
+      fill: #807d4f;
+    }
+    .trail-map-marker:hover circle,
+    .trail-map-marker:focus-visible circle {
+      stroke: var(--heading);
+      transform: scale(1.24);
+    }
+    .trail-map-marker.is-active circle {
+      filter: drop-shadow(0 2px 4px rgba(15, 36, 25, 0.26));
+      stroke: var(--heading);
+      stroke-width: 3;
+      transform: scale(1.36);
+    }
+    .trail-map-key {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 10px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1;
+    }
+    .trail-map-key li {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .trail-map-key-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c76f4d;
+    }
+    .trail-map-key-dot.year-2025 {
+      background: #4d8390;
+    }
+    .trail-map-key-dot.year-2024 {
+      background: #807d4f;
     }
     @media (max-width: 1259px) {
       body:has(.toc-drawer-state:checked) {
@@ -416,15 +628,35 @@
       .toc-scrim {
         display: none !important;
       }
+      .container {
+        height: var(--desktop-entry-height);
+        overflow: hidden;
+      }
+      .hike-content,
+      .hike-content-left,
+      .hike-content-right {
+        min-height: 0;
+      }
+      .vertical-image-container {
+        height: 100%;
+        padding-top: 0;
+      }
+      .hike-content-right .horizontal-image-container {
+        flex: 0 0 auto;
+        margin-top: auto;
+        padding-top: 45%;
+      }
       .toc {
-        display: block;
+        display: flex;
+        flex-direction: column;
         position: fixed;
-        left: max(10px, calc(50vw - 425px - 16px - 188px));
-        top: 220px;
+        left: max(4px, calc(50vw - 425px - 16px - 188px));
+        top: calc(var(--cover-height) + var(--year-line-height) + var(--rail-gap));
         transform: none;
         width: 188px;
-        max-height: calc(100vh - 244px);
-        overflow-y: auto;
+        height: var(--desktop-entry-height);
+        max-height: var(--desktop-entry-height);
+        overflow: hidden;
         padding: 16px 14px;
         margin: 0;
         background: var(--card);
@@ -435,6 +667,20 @@
         z-index: 10;
         font-size: 13px;
         -webkit-overflow-scrolling: touch;
+      }
+      /* The hike list takes the leftover height so the map stays pinned below it. */
+      .toc > ul {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding-bottom: 8px;
+      }
+      .trail-map {
+        display: block;
+        flex: 0 0 auto;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid rgba(141, 149, 135, 0.28);
       }
     }
   </style>
@@ -458,10 +704,10 @@
 <label for="toc-drawer-state" class="toc-scrim" aria-label="Close table of contents"></label>
 
 <nav class="toc" id="site-toc" aria-label="Table of contents">
-  <p class="toc-title">Contents</p>
+  <p class="toc-title">Hike Names</p>
   <ul>
     <li class="toc-year">
-      <a href="#year-2026">2026</a>
+      <a href="#canso-bomber-ruins">2026</a>
       <ul class="toc-hikes">
         <li><a href="#canso-bomber-ruins">Canso Bomber Ruins</a></li>
         <li><a href="#upper-gold-creek">Upper Gold Creek</a></li>
@@ -472,7 +718,7 @@
       </ul>
     </li>
     <li class="toc-year">
-      <a href="#year-2025">2025</a>
+      <a href="#quarry-rock-2025">2025</a>
       <ul class="toc-hikes">
         <li><a href="#quarry-rock-2025">Quarry Rock</a></li>
         <li><a href="#bowen-lookout">Bowen Lookout</a></li>
@@ -483,7 +729,7 @@
       </ul>
     </li>
     <li class="toc-year">
-      <a href="#year-2024">2024</a>
+      <a href="#joffre-lakes">2024</a>
       <ul class="toc-hikes">
         <li><a href="#joffre-lakes">Joffre Lakes</a></li>
         <li><a href="#minnekhada">Minnekhada</a></li>
@@ -497,9 +743,143 @@
       </ul>
     </li>
   </ul>
+
+  <aside class="trail-map" id="trail-map" aria-label="Hike map">
+  <p class="trail-map-title">Hike Map</p>
+  <div class="trail-map-frame">
+    <svg viewBox="104 157.25 34 25.5" aria-labelledby="trail-map-svg-title">
+      <title id="trail-map-svg-title">Draggable map of southern British Columbia and the Alberta Rockies with completed hikes marked</title>
+      <rect x="0" y="0" width="340" height="340" fill="#d8e8e5"></rect>
+      <path class="trail-map-province trail-map-bc" d="M38 70H163.9L180.1 92.2L201.4 114.2L224 136.2L233.9 158.2L247.8 180.2H120.7L118.9 177.5L117.7 174.2L117.55 173.1L117.6 171.9L117.8 170.3L118.4 166.5L119.2 164.7L114.6 168.7L114.2 171.4L110.7 169.8L99.7 161.7L97.2 154.9L93.1 149.4L76.2 142.8L53.5 132.9L48.7 110.6L49 96L42 78Z"></path>
+      <path class="trail-map-province trail-map-ab" d="M163.9 70L180.1 92.2L201.4 114.2L224 136.2L233.9 158.2L247.8 180.2H270V70Z"></path>
+      <path class="trail-map-province trail-map-us" d="M120.7 180.2L124 187L128 196L130 240H270V180.2Z"></path>
+      <path class="trail-map-province trail-map-island" d="M40 138L57.9 142.3L74 150L89.6 157.5L94.1 165.4L101 172.5L108.1 176.6L111.5 185L116.2 192.9L101.3 190.1L91.1 183.9L78.5 179.5L70.5 167L54.2 156L50.7 149.4Z"></path>
+      <path class="trail-map-province trail-map-island" d="M115.5 171.6L116.2 170.7L117.1 171.2L117.2 172.2L116.5 172.9L115.6 172.4Z"></path>
+      <path class="trail-map-border" d="M163.9 70L180.1 92.2L201.4 114.2L224 136.2L233.9 158.2L247.8 180.2M120.7 180.2H270"></path>
+      <text class="trail-map-label" x="146" y="128">BC</text>
+      <text class="trail-map-label" x="236" y="150">AB</text>
+      <text class="trail-map-label" x="146" y="192">USA</text>
+
+      <g class="trail-map-places">
+        <text class="trail-map-place" x="123" y="178.6">Vancouver</text>
+        <text class="trail-map-place" x="124.5" y="156">Whistler</text>
+        <text class="trail-map-place" x="146" y="170.6">Hope</text>
+        <text class="trail-map-place" x="159" y="143">Kamloops</text>
+        <text class="trail-map-place" x="170" y="158.4">Kelowna</text>
+        <text class="trail-map-place" x="229" y="134.6">Banff</text>
+        <text class="trail-map-place" x="86" y="172">Tofino</text>
+        <text class="trail-map-place" x="107" y="189.6">Victoria</text>
+      </g>
+
+      <a class="trail-map-marker" data-year="2026" href="#canso-bomber-ruins" aria-label="Canso Bomber Ruins Trail, Tofino, BC">
+        <title>Canso Bomber Ruins Trail</title>
+        <circle cx="81.8" cy="178.0" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2026" href="#upper-gold-creek" aria-label="Upper Gold Creek, Golden Ears, BC">
+        <title>Upper Gold Creek</title>
+        <circle cx="129.1" cy="171.4" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2026" href="#myra-canyon-trestles" aria-label="Myra Canyon Trestles, Kelowna, BC">
+        <title>Myra Canyon Trestles</title>
+        <circle cx="173.3" cy="163.0" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2026" href="#grouse-grind" aria-label="Grouse Grind, North Vancouver, BC">
+        <title>Grouse Grind</title>
+        <circle cx="120.3" cy="172.0" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2026" href="#chief" aria-label="Chief First Peak, Squamish, BC">
+        <title>Chief First Peak</title>
+        <circle cx="119.4" cy="165.2" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2026" href="#killarney-lake" aria-label="Killarney Lake, Bowen Island, BC">
+        <title>Killarney Lake</title>
+        <circle cx="116.3" cy="171.8" r="3"></circle>
+      </a>
+
+      <a class="trail-map-marker" data-year="2025" href="#quarry-rock-2025" aria-label="Quarry Rock, Coquitlam, BC">
+        <title>Quarry Rock, 2025</title>
+        <circle cx="121.8" cy="172.5" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2025" href="#bowen-lookout" aria-label="Bowen Lookout, Cypress Provincial Park, BC">
+        <title>Bowen Lookout</title>
+        <circle cx="118.6" cy="171.4" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2025" href="#lindeman-lake" aria-label="Lindeman Lake, Chilliwack Lake Provincial Park, BC">
+        <title>Lindeman Lake</title>
+        <circle cx="143.3" cy="178.4" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2025" href="#elfin-lakes" aria-label="Elfin Lakes, Garibaldi Provincial Park, BC">
+        <title>Elfin Lakes</title>
+        <circle cx="121.0" cy="163.0" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2025" href="#golden-ears" aria-label="Golden Ears, Golden Ears Provincial Park, BC">
+        <title>Golden Ears</title>
+        <circle cx="128.9" cy="173.1" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2025" href="#kennedy-falls" aria-label="Kennedy Falls, North Vancouver, BC">
+        <title>Kennedy Falls</title>
+        <circle cx="121.3" cy="171.1" r="3"></circle>
+      </a>
+
+      <a class="trail-map-marker" data-year="2024" href="#joffre-lakes" aria-label="Joffre Lakes, Pemberton, BC">
+        <title>Joffre Lakes</title>
+        <circle cx="128.5" cy="150.0" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#minnekhada" aria-label="Minnekhada, Coquitlam, BC">
+        <title>Minnekhada</title>
+        <circle cx="125.8" cy="173.3" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#lighthouse-park" aria-label="Lighthouse Park, West Vancouver, BC">
+        <title>Lighthouse Park</title>
+        <circle cx="117.7" cy="172.9" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#garibaldi-lake" aria-label="Garibaldi Lake, BC">
+        <title>Garibaldi Lake</title>
+        <circle cx="121.1" cy="159.9" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#eagle-bluffs" aria-label="Eagle Bluffs, Cypress Provincial Park, BC">
+        <title>Eagle Bluffs</title>
+        <circle cx="118.3" cy="171.8" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#tunnel-bluffs" aria-label="Tunnel Bluffs, Squamish-Lillooet, BC">
+        <title>Tunnel Bluffs</title>
+        <circle cx="118.2" cy="168.9" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#lynn-canyon-rice-lake" aria-label="Lynn Canyon and Rice Lake, North Vancouver, BC">
+        <title>Lynn Canyon and Rice Lake</title>
+        <circle cx="121.1" cy="172.7" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#quarry-rock-2024" aria-label="Quarry Rock, North Vancouver, BC">
+        <title>Quarry Rock, 2024</title>
+        <circle cx="122.8" cy="173.3" r="3"></circle>
+      </a>
+      <a class="trail-map-marker" data-year="2024" href="#johnston-canyon-upper-falls" aria-label="Johnston Canyon, Banff, Alberta">
+        <title>Johnston Canyon</title>
+        <circle cx="222.7" cy="130.8" r="3"></circle>
+      </a>
+    </svg>
+  </div>
+  <div class="trail-map-tools">
+    <p class="trail-map-hint">Drag to explore</p>
+    <div class="trail-map-controls">
+      <button type="button" data-map-zoom="out" aria-label="Zoom out" title="Zoom out">&minus;</button>
+      <button type="button" data-map-zoom="in" aria-label="Zoom in" title="Zoom in">+</button>
+      <button type="button" data-map-zoom="fit" aria-label="Show all hikes" title="Show all hikes">
+        <svg viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+          <path d="M1 4V1h3M11 4V1H8M1 8v3h3M11 8v3H8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <ul class="trail-map-key" aria-label="Map marker years">
+    <li><span class="trail-map-key-dot"></span>2026</li>
+    <li><span class="trail-map-key-dot year-2025"></span>2025</li>
+    <li><span class="trail-map-key-dot year-2024"></span>2024</li>
+  </ul>
+  </aside>
 </nav>
 
-<div class="year-header" id="year-2026"><h2>2026</h2></div>
+<div class="year-header" id="year-line"><h2 id="year-line-label">2026</h2></div>
 
 <div class="container" id="canso-bomber-ruins">
   <div class="hike-header">
@@ -759,8 +1139,6 @@
   </div>
 </div>
 
-<div class="year-header" id="year-2025"><h2>2025</h2></div>
-
 <div class="container" id="quarry-rock-2025">
   <div class="hike-header">
     <h2 class="hike-title">Quarry Rock</h2>
@@ -1018,8 +1396,6 @@
     </div>
   </div>
 </div>
-
-<div class="year-header" id="year-2024"><h2>2024</h2></div>
 
 <div class="container" id="joffre-lakes">
   <div class="hike-header">
@@ -1446,39 +1822,103 @@
   }
 
   var desktopMq = window.matchMedia('(min-width: 1260px)');
-  var yearHeader = document.getElementById('year-2026');
+  var coverHeader = document.querySelector('header');
+  var firstHike = document.querySelector('.container[id]');
+  var trailMap = document.getElementById('trail-map');
+  var yearLine = document.getElementById('year-line');
+  var yearLabel = document.getElementById('year-line-label');
+  var railTop = 0;
+  var shownYear = '';
+  var fixedCoverHeight = 0;
+  var fixedYearHeight = 0;
+  var fixedRailGap = 6;
 
-  function positionDesktopToc() {
-    if (!yearHeader || !desktopMq.matches) {
+  initTrailMap(trailMap);
+
+  function syncFixedRailSizes() {
+    fixedCoverHeight = coverHeader ? Math.ceil(coverHeader.offsetHeight) : 0;
+    fixedYearHeight = yearLine ? Math.ceil(yearLine.offsetHeight) : 0;
+    fixedRailGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rail-gap')) || 6;
+    document.documentElement.style.setProperty('--cover-height', fixedCoverHeight + 'px');
+    document.documentElement.style.setProperty('--year-line-height', fixedYearHeight + 'px');
+  }
+
+  function stuckOffset() {
+    return fixedCoverHeight + fixedYearHeight + fixedRailGap;
+  }
+
+  function yearOf(section) {
+    var date = section && section.querySelector('.hike-date');
+    var match = date && date.textContent.match(/\b(20\d{2})\b/);
+    return match ? match[1] : '';
+  }
+
+  function setYear(year) {
+    if (!year || !yearLabel || year === shownYear) return;
+    shownYear = year;
+    yearLabel.textContent = year;
+  }
+
+  // Sidebar stays glued just under the year line. At the top of the page that
+  // puts it level with the hike cards while all three rails remain pinned.
+  function positionDesktopRails() {
+    syncFixedRailSizes();
+    document.documentElement.style.setProperty('--hike-scroll-margin', stuckOffset() + 'px');
+    if (!firstHike || !desktopMq.matches) {
+      railTop = 0;
       toc.style.top = '';
       toc.style.maxHeight = '';
       return;
     }
-    var gap = 16;
-    var top = yearHeader.offsetTop + yearHeader.offsetHeight + gap;
-    toc.style.top = top + 'px';
-    toc.style.maxHeight = 'calc(100vh - ' + (top + 24) + 'px)';
+    railTop = Math.round(stuckOffset());
+    toc.style.top = railTop + 'px';
+    toc.style.maxHeight = 'calc(100vh - ' + (railTop + 16) + 'px)';
   }
-
-  desktopMq.addEventListener('change', positionDesktopToc);
-  window.addEventListener('resize', positionDesktopToc);
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(positionDesktopToc);
-  }
-  positionDesktopToc();
 
   var sections = [].slice.call(document.querySelectorAll('.container[id]'));
   var hikeLinks = toc.querySelectorAll('.toc-hikes a[href^="#"]');
+  var yearLinks = toc.querySelectorAll('.toc-year > a[href^="#"]');
+  var mapLinks = trailMap ? trailMap.querySelectorAll('.trail-map-marker[href^="#"]') : [];
   var linkById = {};
+  var mapMarkerById = {};
   hikeLinks.forEach(function (a) {
     var id = a.getAttribute('href').slice(1);
     linkById[id] = a;
   });
+  mapLinks.forEach(function (a) {
+    var id = a.getAttribute('href').slice(1);
+    mapMarkerById[id] = a;
+  });
+
+  // The last hike sits at the end of the document, so on its own it can never scroll
+  // high enough to reach the alignment line — which also kept the spy from ever
+  // marking it active. Add exactly the slack it needs, and no more.
+  function padForLastHike() {
+    if (!sections.length) return;
+    var minTop = stuckOffset();
+    var last = sections[sections.length - 1];
+    document.body.style.paddingBottom = '0px';
+    var need = last.offsetTop + window.innerHeight - minTop
+      - document.documentElement.scrollHeight;
+    document.body.style.paddingBottom = Math.max(0, Math.ceil(need)) + 'px';
+  }
+
+  function relayout() {
+    positionDesktopRails();
+    padForLastHike();
+  }
+
+  desktopMq.addEventListener('change', relayout);
+  window.addEventListener('resize', relayout);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(relayout);
+  }
+  relayout();
 
   var tocSpyTicking = false;
   function updateTocActive() {
     tocSpyTicking = false;
-    var offset = Math.min(160, Math.max(88, Math.floor(window.innerHeight * 0.22)));
+    var offset = stuckOffset() + 4;
     var activeId = null;
     for (var i = sections.length - 1; i >= 0; i--) {
       var rect = sections[i].getBoundingClientRect();
@@ -1488,8 +1928,21 @@
       }
     }
     if (!activeId && sections.length) activeId = sections[0].id;
+    var activeYear = yearOf(document.getElementById(activeId));
+    setYear(activeYear);
+
+    sections.forEach(function (s) {
+      s.classList.toggle('is-dimmed', s.id !== activeId);
+    });
 
     hikeLinks.forEach(function (a) {
+      a.classList.remove('is-active');
+      a.removeAttribute('aria-current');
+    });
+    yearLinks.forEach(function (a) {
+      a.classList.toggle('is-active', a.textContent.trim() === activeYear);
+    });
+    mapLinks.forEach(function (a) {
       a.classList.remove('is-active');
       a.removeAttribute('aria-current');
     });
@@ -1497,6 +1950,37 @@
     if (activeLink) {
       activeLink.classList.add('is-active');
       activeLink.setAttribute('aria-current', 'location');
+      keepActiveTocVisible(activeLink);
+    }
+    var activeMarker = mapMarkerById[activeId];
+    if (activeMarker) {
+      activeMarker.classList.add('is-active');
+      activeMarker.setAttribute('aria-current', 'location');
+    }
+  }
+
+  // Desktop scrolls the hike list itself; the mobile drawer scrolls as a whole.
+  function tocScroller() {
+    var list = toc.querySelector('ul');
+    if (list && list.scrollHeight > list.clientHeight + 1) {
+      var overflow = window.getComputedStyle(list).overflowY;
+      if (overflow === 'auto' || overflow === 'scroll') return list;
+    }
+    if (toc.scrollHeight > toc.clientHeight + 1) return toc;
+    return null;
+  }
+
+  function keepActiveTocVisible(link) {
+    var box = link && tocScroller();
+    if (!box) return;
+    var marginTop = 20;
+    var marginBottom = 36;
+    var boxRect = box.getBoundingClientRect();
+    var linkRect = link.getBoundingClientRect();
+    if (linkRect.top < boxRect.top + marginTop) {
+      box.scrollTop -= (boxRect.top + marginTop) - linkRect.top;
+    } else if (linkRect.bottom > boxRect.bottom - marginBottom) {
+      box.scrollTop += linkRect.bottom - (boxRect.bottom - marginBottom);
     }
   }
 
@@ -1514,6 +1998,191 @@
       document.fonts.ready.then(requestTocActive);
     }
     updateTocActive();
+  }
+
+  // Drag-to-pan / scroll-to-zoom over a fixed world, driven by the SVG viewBox.
+  function initTrailMap(mapEl) {
+    if (!mapEl) return;
+    var frame = mapEl.querySelector('.trail-map-frame');
+    var svg = mapEl.querySelector('.trail-map-frame > svg');
+    if (!frame || !svg) return;
+
+    var WORLD = { x: 45, y: 95, w: 205, h: 120 };
+    var MIN_W = 6;
+    var MARKER_PX = 3.8;
+    var REGION_PX = 11;
+    var PLACE_PX = 7;
+    var PLACES_MAX_W = 90;
+
+    var circles = [].slice.call(svg.querySelectorAll('.trail-map-marker circle'));
+    var regionLabels = [].slice.call(svg.querySelectorAll('.trail-map-label'));
+    var placeGroup = svg.querySelector('.trail-map-places');
+    var placeLabels = placeGroup ? [].slice.call(placeGroup.querySelectorAll('text')) : [];
+
+    var view = { x: 104, y: 157.25, w: 34, h: 25.5 };
+
+    function clamp(v, lo, hi) {
+      return v < lo ? lo : (v > hi ? hi : v);
+    }
+
+    function box() {
+      return svg.getBoundingClientRect();
+    }
+
+    function aspect() {
+      var r = box();
+      return r.width > 0 ? r.height / r.width : 0.75;
+    }
+
+    function render() {
+      svg.setAttribute('viewBox', view.x + ' ' + view.y + ' ' + view.w + ' ' + view.h);
+      var r = box();
+      // Markers and text keep a fixed on-screen size, so zooming spreads them apart
+      // rather than just magnifying everything.
+      var unit = r.width > 0 ? view.w / r.width : view.w / 160;
+      circles.forEach(function (c) {
+        c.setAttribute('r', (MARKER_PX * unit).toFixed(3));
+      });
+      regionLabels.forEach(function (t) {
+        t.setAttribute('font-size', (REGION_PX * unit).toFixed(3));
+      });
+      placeLabels.forEach(function (t) {
+        t.setAttribute('font-size', (PLACE_PX * unit).toFixed(3));
+      });
+      if (placeGroup) {
+        placeGroup.setAttribute('opacity', view.w <= PLACES_MAX_W ? '1' : '0');
+      }
+    }
+
+    function setView(x, y, w) {
+      w = clamp(w, MIN_W, WORLD.w);
+      var h = w * aspect();
+      view.w = w;
+      view.h = h;
+      view.x = w >= WORLD.w ? WORLD.x + (WORLD.w - w) / 2 : clamp(x, WORLD.x, WORLD.x + WORLD.w - w);
+      view.y = h >= WORLD.h ? WORLD.y + (WORLD.h - h) / 2 : clamp(y, WORLD.y, WORLD.y + WORLD.h - h);
+      render();
+    }
+
+    function zoomAround(nextW, clientX, clientY) {
+      var r = box();
+      if (!r.width || !r.height) {
+        setView(view.x, view.y, nextW);
+        return;
+      }
+      var fx = (clientX - r.left) / r.width;
+      var fy = (clientY - r.top) / r.height;
+      var anchorX = view.x + fx * view.w;
+      var anchorY = view.y + fy * view.h;
+      nextW = clamp(nextW, MIN_W, WORLD.w);
+      setView(anchorX - fx * nextW, anchorY - fy * (nextW * aspect()), nextW);
+    }
+
+    function fitAllHikes() {
+      if (!circles.length) return;
+      var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+      circles.forEach(function (c) {
+        var cx = parseFloat(c.getAttribute('cx'));
+        var cy = parseFloat(c.getAttribute('cy'));
+        if (cx < minX) minX = cx;
+        if (cx > maxX) maxX = cx;
+        if (cy < minY) minY = cy;
+        if (cy > maxY) maxY = cy;
+      });
+      var pad = 10;
+      var a = aspect();
+      var w = Math.max(maxX - minX + pad * 2, (maxY - minY + pad * 2) / a);
+      setView((minX + maxX) / 2 - w / 2, (minY + maxY) / 2 - (w * a) / 2, w);
+    }
+
+    var pointerDown = false;
+    var panning = false;
+    var travelled = 0;
+    var lastX = 0;
+    var lastY = 0;
+    var activePointer = null;
+
+    svg.addEventListener('pointerdown', function (e) {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      pointerDown = true;
+      panning = false;
+      travelled = 0;
+      lastX = e.clientX;
+      lastY = e.clientY;
+      activePointer = e.pointerId;
+    });
+
+    svg.addEventListener('pointermove', function (e) {
+      if (!pointerDown || e.pointerId !== activePointer) return;
+      var r = box();
+      if (!r.width) return;
+      var dx = e.clientX - lastX;
+      var dy = e.clientY - lastY;
+      travelled += Math.abs(dx) + Math.abs(dy);
+      if (!panning) {
+        // A few stray pixels should still count as a click on a marker.
+        if (travelled <= 3) return;
+        panning = true;
+        frame.classList.add('is-panning');
+        // Capture only once a real drag starts. Capturing on pointerdown would
+        // retarget the click to the <svg> and stop marker links from opening.
+        if (svg.setPointerCapture) svg.setPointerCapture(e.pointerId);
+      }
+      lastX = e.clientX;
+      lastY = e.clientY;
+      setView(view.x - dx * (view.w / r.width), view.y - dy * (view.h / r.height), view.w);
+    });
+
+    function stopDrag() {
+      if (!pointerDown) return;
+      pointerDown = false;
+      panning = false;
+      frame.classList.remove('is-panning');
+      if (activePointer !== null && svg.hasPointerCapture && svg.hasPointerCapture(activePointer)) {
+        svg.releasePointerCapture(activePointer);
+      }
+      activePointer = null;
+    }
+
+    svg.addEventListener('pointerup', stopDrag);
+    svg.addEventListener('pointercancel', stopDrag);
+
+    // A drag that happens to finish on a marker shouldn't follow its link.
+    svg.addEventListener('click', function (e) {
+      if (travelled > 5) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+
+    svg.addEventListener('wheel', function (e) {
+      e.preventDefault();
+      var delta = e.deltaY * (e.deltaMode === 1 ? 16 : 1);
+      zoomAround(view.w * Math.exp(delta * 0.0015), e.clientX, e.clientY);
+    }, { passive: false });
+
+    mapEl.addEventListener('click', function (e) {
+      var button = e.target.closest('[data-map-zoom]');
+      if (!button) return;
+      var action = button.getAttribute('data-map-zoom');
+      var r = box();
+      var cx = r.left + r.width / 2;
+      var cy = r.top + r.height / 2;
+      if (action === 'in') zoomAround(view.w / 1.6, cx, cy);
+      else if (action === 'out') zoomAround(view.w * 1.6, cx, cy);
+      else fitAllHikes();
+    });
+
+    function refresh() {
+      setView(view.x, view.y, view.w);
+    }
+
+    window.addEventListener('resize', refresh);
+    desktopMq.addEventListener('change', refresh);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(refresh);
+    }
+    refresh();
   }
 })();
 </script>
